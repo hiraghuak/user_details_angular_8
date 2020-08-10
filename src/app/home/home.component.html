@@ -1,0 +1,166 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand">User Data</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link">User Data</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+<div class="container-fluid mt-5 ">
+  <div class="row">
+    <div class="col-lg-6">
+      <h2>User Data</h2>
+    </div>
+    <div class="col-lg-6 text-right">
+      <button type="button" class="btn btn-primary" (click)="ExToCSV()">Export CSV</button>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th scope="col">first_name</th>
+          <th scope="col">last_name</th>
+          <th scope="col">gender</th>
+          <th scope="col">dob</th>
+          <th scope="col">email</th>
+          <th scope="col">phone</th>
+          <th scope="col">website</th>
+          <th scope="col">address</th>
+          <th scope="col">status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{user.first_name}}</td>
+          <td>{{user.last_name}}</td>
+          <td>{{user.gender}}</td>
+          <td>{{user.dob}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.phone}}</td>
+          <td>{{user.website}}</td>
+          <td>{{user.address}}</td>
+          <td>{{user.status}}</td>
+          <td>
+            <button type="button" class="btn btn-primary" (click)="EditUser(user.pk);open(content);">Edit</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Edit User Data</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form #EditDeprtFormData="ngForm" (ngSubmit)="EditUserDataSubmit();EditDeprtFormData.resetForm()">
+          <div class="row">
+
+            <input type="hidden" class="form-control" #pkControl="ngModel" [(ngModel)]="EditUserData.pk" name="pk">
+
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                <label for="user_id">user id</label>
+                <input type="text" class="form-control" #user_idControl="ngModel" [(ngModel)]="EditUserData.user_id"
+                  name="user_id">
+              </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                <label for="first_name">First Name</label>
+                <input type="text" class="form-control" #first_nameControl="ngModel"
+                  [(ngModel)]="EditUserData.first_name" name="first_name">
+              </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                <label for="last_name">last_name</label>
+                <input type="text" class="form-control" #last_nameControl="ngModel" [(ngModel)]="EditUserData.last_name"
+                  name="last_name">
+              </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                <label for="gender">gender</label>
+                <input type="text" class="form-control" #genderControl="ngModel" [(ngModel)]="EditUserData.gender"
+                  name="gender">
+              </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                <label for="dob">dob</label>
+                <input type="text" class="form-control" #dobControl="ngModel" [(ngModel)]="EditUserData.dob" name="dob">
+              </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                <label for="email">email</label>
+                <input type="text" class="form-control" #emailControl="ngModel" [(ngModel)]="EditUserData.email"
+                  name="email">
+              </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                <label for="phone">phone</label>
+                <input type="text" class="form-control" #phoneControl="ngModel" [(ngModel)]="EditUserData.phone"
+                  name="phone">
+              </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                <label for="website">website</label>
+                <input type="text" class="form-control" #websiteControl="ngModel" [(ngModel)]="EditUserData.website"
+                  name="website">
+              </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                <label for="address">address</label>
+                <input type="text" class="form-control" #addressControl="ngModel" [(ngModel)]="EditUserData.address"
+                  name="address">
+              </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="form-group">
+                <label for="status">status</label>
+                <input type="text" class="form-control" #statusControl="ngModel" [(ngModel)]="EditUserData.status"
+                  name="status">
+              </div>
+            </div>
+
+          </div>
+          <button type="button" class="btn btn-secondary mr-2" (click)="modal.close('Save click')">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+
+      </div>
+    </ng-template>
+
+  </div>
+</div>
